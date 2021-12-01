@@ -2,3 +2,84 @@
 SELECT * 
 FROM cities
 
+SELECT * 
+FROM cities
+-- Inner join to countries
+INNER JOIN countries
+  -- Match on the country codes
+  ON cities.country_code = countries.code;
+    
+-- Select name fields (with alias) and region 
+SELECT cities.name AS city, countries.name AS country, region
+-- JOINING DATA IN SQL
+FROM cities 
+  INNER JOIN countries 
+  ON cities.country_code = countries.code;
+
+-- Select fields with aliases
+SELECT c.code AS country_code, name, year, inflation_rate
+FROM countries AS c
+-- Join to economies (alias e)
+INNER JOIN economies AS e 
+  -- Match on code
+  ON c.code = e.code;
+  
+-- Select fields
+SELECT c.code, c.name, c.region, p.year,
+  p.fertility_rate
+-- From countries (alias as c)
+FROM countries AS c
+-- Join with populations (as p)
+INNER JOIN populations AS p
+  -- Match on country code
+  ON c.code = p.country_code
+
+-- Select fields
+SELECT c.code, name, region, e.year, fertility_rate,
+  e.unemployment_rate
+-- From countries (alias as c)
+FROM countries AS c
+-- Join to populations (as p)
+INNER JOIN populations AS p
+  -- Match on country code
+  ON c.code = p.country_code
+-- Join to economies (as e)
+INNER JOIN economies AS e
+  -- Match on country code
+  ON p.country_code = e.code;
+  
+-- Select fields
+SELECT c.code, name, region, e.year, fertility_rate, unemployment_rate
+-- From countries (alias as c)
+FROM countries AS c
+-- Join to populations (as p)
+INNER JOIN populations AS p
+  -- Match on country code
+  ON c.code = p.country_code
+-- Join to economies (as e)
+INNER JOIN economies AS e
+  -- Match on country code and year
+  ON c.code = e.code AND e.year = p.year;
+  
+-- Select fields
+SELECT c.name AS country,
+  c.continent, 
+  l.name AS language,
+  l.official
+-- From countries (alias as c)
+FROM countries AS c
+-- Join to languages (as l)
+INNER JOIN languages AS l
+  -- Match using code
+  USING(code)
+  
+-- Select fields with aliases
+SELECT p1.country_code, 
+p1.size AS size2010,
+p2.size AS size2015
+-- From populations (alias as p1)
+FROM populations AS p1
+-- Join to itself (alias as p2)
+JOIN populations AS p2
+  -- Match on country code
+  ON p1.country_code = p2.country_code 
