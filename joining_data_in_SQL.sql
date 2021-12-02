@@ -96,3 +96,4 @@ INNER JOIN populations as p2
 ON p1.country_code = p2.country_code
     -- and year (with calculation)
     AND p1.year = p2.year - 5
+
