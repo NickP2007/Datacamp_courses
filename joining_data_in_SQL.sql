@@ -123,3 +123,17 @@ SELECT name, continent, code, surface_area,
         AS geosize_group
 -- From table
 FROM countries;
+
+SELECT country_code, size,
+    -- First case
+    CASE WHEN size > 50000000 THEN 'large'
+        -- Second case
+        WHEN size > 1000000 THEN 'medium'
+        -- Else clause + end
+        ELSE 'small' END
+        -- Alias name (popsize_group)
+        AS popsize_group
+-- From table
+FROM populations
+-- Focus on 2015
+WHERE year = 2015;
