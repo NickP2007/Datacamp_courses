@@ -1,4 +1,6 @@
--- INTRODUCTION TO JOINS
+--- INTRODUCTION TO JOINS
+
+--- Inner Join
 
 -- Select all columns from cities
 SELECT * 
@@ -17,6 +19,8 @@ SELECT cities.name AS city, countries.name AS country, region
 FROM cities 
 INNER JOIN countries 
 ON cities.country_code = countries.code;
+
+--- Inner Join (2)
 
 -- Select fields with aliases
 SELECT c.code AS country_code, name, year, inflation_rate
@@ -63,6 +67,8 @@ INNER JOIN economies AS e
 -- Match on country code and year
 ON c.code = e.code AND e.year = p.year;
   
+--- Inner join with using
+
 -- Select fields
 SELECT c.name AS country,
   c.continent, 
@@ -74,7 +80,9 @@ FROM countries AS c
 INNER JOIN languages AS l
 -- Match using code
 USING(code)
-  
+
+--- Self-join
+
 -- Select fields with aliases
 SELECT p1.country_code, 
 p1.size AS size2010,
@@ -114,6 +122,8 @@ ON p1.country_code = p2.country_code
 -- and year (with calculation)
 AND p1.year = p2.year - 5;
 
+--- Case when and then
+
 SELECT name, continent, code, surface_area,
     -- First case
     CASE WHEN surface_area > 2000000 THEN 'large'
@@ -125,6 +135,8 @@ SELECT name, continent, code, surface_area,
         AS geosize_group
 -- From table
 FROM countries;
+
+--- Inner challenge
 
 SELECT country_code, size,
     -- First case
@@ -162,7 +174,9 @@ INNER JOIN pop_plus AS p
 -- Order the table    
 ORDER BY 3 ASC;
 
--- OUTER JOINS AND CROSS JOINS
+--- OUTER JOINS AND CROSS JOINS
+
+--- Left Join
 
 -- Select the city name (with alias), the country code,
 -- the country name (with alias), the region,
@@ -187,6 +201,8 @@ LEFT JOIN countries AS c2
   ON c1.country_code = c2.code
 -- Order by descending country code
 ORDER BY code DESC;
+
+--- Left join (2)
 
 /*
 Select country name AS country, the country's local name,
@@ -217,6 +233,8 @@ LEFT JOIN languages AS l
   ON c.code = l.code
 -- Order by descending country
 ORDER BY country DESC;
+
+--- Left join (3)
 
 -- Select name, region, and gdp_percapita
 SELECT name, region, gdp_percapita
@@ -269,3 +287,6 @@ WHERE year = 2010
 GROUP BY region
 -- Order by descending avg_gdp
 ORDER BY avg_gdp DESC;
+
+--- Right join
+
