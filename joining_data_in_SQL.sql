@@ -436,3 +436,5 @@ ORDER BY life_exp
 LIMIT 5;
 
 --- SET THEORY CLAUSES
+
+--- Union
