@@ -468,3 +468,32 @@ FROM currencies
 -- Order by country_code
 ORDER BY country_code;
 
+--- Union all
+
+-- Select fields
+SELECT code, year
+-- From economies
+FROM economies
+-- Set theory clause
+UNION ALL
+-- Select fields
+SELECT country_code, year
+ -- From populations
+ FROM populations
+-- Order by code, year
+ORDER BY code, year;
+
+--- Intersect
+
+-- Select fields
+SELECT code, year
+-- From economies
+FROM economies
+-- Set theory clause
+INTERSECT
+-- Select fields
+SELECT country_code, year
+ -- From populations
+ FROM populations
+-- Order by code and year
+ORDER BY code, year;
