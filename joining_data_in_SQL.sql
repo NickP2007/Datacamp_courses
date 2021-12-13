@@ -497,3 +497,5 @@ SELECT country_code, year
  FROM populations
 -- Order by code and year
 ORDER BY code, year;
+
+--- Intersect (2)
