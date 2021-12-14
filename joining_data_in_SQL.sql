@@ -499,3 +499,16 @@ SELECT country_code, year
 ORDER BY code, year;
 
 --- Intersect (2)
+
+-- Select fields
+SELECT name
+  -- From countries
+  FROM countries
+	-- Set theory clause
+	INTERSECT
+-- Select fields
+SELECT name
+  -- From cities
+  FROM cities;
+  
+  --- Except
