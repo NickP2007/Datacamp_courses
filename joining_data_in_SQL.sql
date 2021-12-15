@@ -202,7 +202,7 @@ LEFT JOIN countries AS c2
 -- Order by descending country code
 ORDER BY code DESC;
 
---- Left join (2)
+--- Left join(2)
 
 /*
 Select country name AS country, the country's local name,
@@ -234,7 +234,7 @@ LEFT JOIN languages AS l
 -- Order by descending country
 ORDER BY country DESC;
 
---- Left join (3)
+--- Left join(3)
 
 -- Select name, region, and gdp_percapita
 SELECT name, region, gdp_percapita
@@ -453,7 +453,7 @@ FROM economies2015
 ORDER BY  code, year;
 
 
---- Union (2)
+--- Union(2)
 
 -- Select field
 SELECT country_code
@@ -498,7 +498,7 @@ SELECT country_code, year
 -- Order by code and year
 ORDER BY code, year;
 
---- Intersect (2)
+--- Intersect(2)
 
 -- Select fields
 SELECT name
@@ -512,3 +512,124 @@ SELECT name
   FROM cities;
   
   --- Except
+
+-- Select field
+SELECT name
+-- From cities
+FROM cities
+-- Set theory clause
+EXCEPT
+-- Select field
+SELECT capital
+-- From countries
+FROM countries
+-- Order by result
+ORDER BY name;
+
+--- Except(2)
+
+-- Select field
+SELECT capital
+-- From countries
+FROM countries
+-- Set theory clause
+EXCEPT
+-- Select field
+SELECT name
+-- From cities
+FROM cities
+-- Order by ascending capital
+ORDER BY capital;
+
+--- Semi-join
+
+-- Select code
+SELECT code
+-- From countries
+FROM countries
+-- Where region is Middle East
+WHERE region = 'Middle East';
+
+-- Select field
+SELECT DISTINCT name
+-- From languages
+FROM languages
+-- Order by name
+ORDER BY name;
+
+-- Query from step 2
+SELECT DISTINCT name
+ ROM languages
+-- Where in statement
+WHERE code IN
+-- Query from step 1
+-- Subquery
+(SELECT code
+ FROM countries
+ WHERE region = 'Middle East')
+-- Order by name
+ORDER BY name;
+
+--- Diagnosing problems using anti-join
+
+-- Select statement
+SELECT COUNT(DISTINCT name)
+-- From countries
+FROM countries
+-- Where continent is Oceania
+WHERE continent = 'Oceania';
+
+-- Select fields (with aliases)
+SELECT c1.code, c1.name, c2.basic_unit AS currency 
+-- From countries (alias as c1)
+ROM countries AS c1
+-- Join with currencies (alias as c2)
+INNER JOIN currencies AS c2
+-- Match on code
+ON c1.code = c2.code
+-- Where continent is Oceania
+WHERE continent = 'Oceania';
+
+--- Set theory challenge
+
+-- Select the city name
+SELECT name
+-- Alias the table where city name resides
+FROM cities AS c1
+-- Choose only records matching the result of multiple set theory clauses
+WHERE country_code IN
+(
+-- Select appropriate field from economies AS 
+SELECT e.cod
+FROM economies AS 
+-- Get all additional (unique) values of the field from currencies AS c2 
+UNIO
+SELECT c2.cod
+FROM currencies AS c
+-- Exclude those appearing in populations AS 
+EXCEP
+SELECT p.country_cod
+FROM populations AS p
+);
+
+--- Subquery inside where
+
+-- Select average life_expectancy
+SELECT AVG(life_expectancy)
+-- From populations
+FROM populations
+-- Where year is 2015
+WHERE year = '2015'
+
+-- Select fields
+SELECT *
+-- From populations
+FROM populations 
+-- Where life_expectancy is greater than
+WHERE life_expectancy > 1.15 * 
+-- 1.15 * subquery
+(SELECT AVG(life_expectancy) 
+FROM populations
+WHERE year = '2015')
+AND year = '2015'
+;
