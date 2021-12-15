@@ -153,12 +153,12 @@ FROM populations
 WHERE year = 2015;
 
 SELECT country_code, size,
-CASE WHEN size > 50000000
-      THEN 'large'
- WHEN size > 1000000
-      THEN 'medium'
- ELSE 'small' END
- AS popsize_group
+  CASE WHEN size > 50000000
+            THEN 'large'
+       WHEN size > 1000000
+            THEN 'medium'
+       ELSE 'small' END
+       AS popsize_group
 INTO pop_plus       
 FROM populations
 WHERE year = 2015;
@@ -502,109 +502,13 @@ ORDER BY code, year;
 
 -- Select fields
 SELECT name
--- From countries
-FROM countries
--- Set theory clause
-INTERSECT
+  -- From countries
+  FROM countries
+	-- Set theory clause
+	INTERSECT
 -- Select fields
 SELECT name
--- From cities
-FROM cities;
+  -- From cities
+  FROM cities;
   
- --- Except
-
--- Select field
-SELECT cities.name
--- From cities
-FROM cities
--- Set theory clause
-EXCEPT
--- Select field
-SELECT countries.capital
--- From countries
-FROM countries
--- Order by result
-ORDER BY name;
-
---- Except (2)
-
--- Select field
-SELECT countries.capital
--- From countries
-FROM countries
--- Set theory clause
-EXCEPT
--- Select field
-SELECT cities.name
--- From cities
-FROM cities
--- Order by ascending capital
-ORDER BY capital;
-
---- Semi-join
-
--- Select code
-SELECT code
--- From countries
-FROM countries
--- Where region is Middle East
-WHERE region = 'Middle East';
-
---- Diagnosing problems using anti-join
-
--- Select statement
-SELECT COUNT(DISTINCT name)
--- From countries
-FROM countries
--- Where continent is Oceania
-WHERE continent = 'Oceania';
-
--- Select fields (with aliases)
-SELECT c1.code, c1.name, c2.basic_unit AS currency 
--- From countries (alias as c1)
-FROM countries AS c1
--- Join with currencies (alias as c2)
-INNER JOIN currencies AS c2
--- Match on code
-ON c1.code = c2.code
--- Where continent is Oceania
-WHERE continent = 'Oceania';
-
--- Select fields
-SELECT code, name
--- From Countries
-FROM countries
--- Where continent is Oceania
-WHERE continent = 'Oceania'
--- And code not in
-AND code NOT IN 
--- Subquery
-(SELECT code
-FROM currencies);
-
---- Set theory challenge
-
--- Select the city name
-SELECT name
--- Alias the table where city name resides
-FROM cities AS c1
--- Choose only records matching the result of multiple set theory clauses
-WHERE country_code IN
-(
-   -- Select appropriate field from economies AS e
-   SELECT e.code
-   FROM economies AS e
-   -- Get all additional (unique) values of the field from currencies AS c2  
-   UNION
-   SELECT c2.code
-   FROM currencies AS c2
-   -- Exclude those appearing in populations AS p
-   EXCEPT
-   SELECT p.country_code
-   FROM populations AS p
-);
-
---- SUBQUERIES
-
---- Subquery inside where
-
+  --- Except
