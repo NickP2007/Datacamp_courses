@@ -633,3 +633,29 @@ FROM populations
 WHERE year = '2015')
 AND year = '2015'
 ;
+
+--- Subquery inside where(2)
+
+-- Select fields
+SELECT *
+-- From populations
+FROM populations 
+-- Where life_expectancy is greater than
+WHERE life_expectancy > 1.15 * 
+  -- 1.15 * subquery
+  (SELECT AVG(life_expectancy) 
+  FROM populations
+  WHERE year = '2015')
+  AND year = '2015'
+;
+
+--- Subquery inside select
+
+SELECT countries.name AS country,
+  -- Subquery
+  (SELECT COUNT(*)
+   FROM cities
+   WHERE countries.code = cities.country_code) AS cities_num
+FROM countries
+ORDER BY cities_num DESC, country
+LIMIT 9;
