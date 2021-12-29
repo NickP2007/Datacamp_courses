@@ -700,3 +700,5 @@ FROM (
 -- Group by continent
 GROUP BY continent;  
 
+
+
