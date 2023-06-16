@@ -1,3 +1,4 @@
+# AGGREGATING DATAFRAMES
 Instructions: Mean and Median
 # Explore your new DataFrame first by printing the first few rows of the sales DataFrame.
 # Print information about the columns in sales.
